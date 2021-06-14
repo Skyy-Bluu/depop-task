@@ -57,7 +57,7 @@ class PopularListAdapter(private val onClickListener: OnClickListener) : ListAda
             useImageViewAndHideViewPager()
             description.text = shopItems.description
             userIdView.text = shopItems.userID.toString()
-            shopItems.picturesData[0].loadImageUsingGlide(imageView)
+            itemView.post { shopItems.picturesData[0].loadImageUsingGlide(imageView) }
         }
 
         private fun useImageViewAndHideViewPager() {
