@@ -15,7 +15,7 @@ class ViewPagerImageAdapter : ListAdapter<PicturesData,
         ViewPagerImageAdapter.PicturesDataViewHolder>(DiffCallback) {
     override fun onBindViewHolder(holder: PicturesDataViewHolder, position: Int) {
         val pictureData = getItem(position)
-        holder.bind(pictureData)
+        holder.itemView.post { holder.bind(pictureData) }
     }
 
     override fun onCreateViewHolder(
@@ -40,7 +40,6 @@ class ViewPagerImageAdapter : ListAdapter<PicturesData,
 
     class PicturesDataViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val imageView = view.findViewById<ImageView>(R.id.sliding_image)
-
         fun bind(picturesData: PicturesData) {
             picturesData.loadImageUsingGlide(imageView)
         }
