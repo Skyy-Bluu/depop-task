@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/popularItemsFragment">
+
+    <fragment
+        android:id="@+id/popularItemsFragment"
+        android:name="com.example.depoptask.PopularItemsFragment"
+        android:label="PopularItemsFragment"
+        tools:layout="@layout/fragment_popular_items">
+        <action
+            android:id="@+id/action_popularItemsFragment_to_itemDetails"
+            app:destination="@id/itemDetails"
+            app:popUpTo="@id/popularItemsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/itemDetails"
+        android:name="com.example.depoptask.PopularItemFragment"
+        android:label="PopularItemFragment"
+        tools:layout="@layout/fragment_popular_item">
+        <argument
+            android:name="selectedItem"
+            app:argType="com.example.depoptask.Objects" />
+    </fragment>
+</navigation>
