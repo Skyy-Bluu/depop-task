@@ -1,4 +1,4 @@
-package com.example.depoptask
+package com.example.depoptask.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.depoptask.R
+import com.example.depoptask.adapters.PopularListAdapter
 import com.example.depoptask.viewmodels.PopularItemsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,7 +45,9 @@ class PopularItemsFragment : Fragment() {
         viewModel.navigateWithSelectedItem.observe(viewLifecycleOwner, {
             if (it != null) {
                 this.findNavController().navigate(
-                    PopularItemsFragmentDirections.actionPopularItemsFragmentToItemDetails(it)
+                    PopularItemsFragmentDirections.actionPopularItemsFragmentToItemDetails(
+                        it
+                    )
                 )
                 viewModel.itemChosen()
             }

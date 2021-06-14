@@ -1,4 +1,4 @@
-package com.example.depoptask
+package com.example.depoptask.network
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

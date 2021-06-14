@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/popularItemsFragment"
-        android:name="com.example.depoptask.PopularItemsFragment"
+        android:name="com.example.depoptask.fragments.PopularItemsFragment"
         android:label="PopularItemsFragment"
         tools:layout="@layout/fragment_popular_items">
         <action
@@ -18,11 +18,11 @@
 
     <fragment
         android:id="@+id/itemDetails"
-        android:name="com.example.depoptask.PopularItemFragment"
+        android:name="com.example.depoptask.fragments.PopularItemFragment"
         android:label="PopularItemFragment"
         tools:layout="@layout/fragment_popular_item">
         <argument
             android:name="selectedItem"
-            app:argType="com.example.depoptask.Objects" />
+            app:argType="com.example.depoptask.network.ShopItem" />
     </fragment>
 </navigation>

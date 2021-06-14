@@ -3,8 +3,8 @@ package com.example.depoptask.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.depoptask.ShopItem
-import com.example.depoptask.viewmodels.network.getPopularItems
+import com.example.depoptask.network.ShopItem
+import com.example.depoptask.network.getPopularItems
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

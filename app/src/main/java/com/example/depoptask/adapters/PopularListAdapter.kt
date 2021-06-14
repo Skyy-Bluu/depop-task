@@ -1,4 +1,4 @@
-package com.example.depoptask
+package com.example.depoptask.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.net.toUri
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.example.depoptask.PopularItemCardView
+import com.example.depoptask.R
+import com.example.depoptask.loadImageUsingGlide
+import com.example.depoptask.network.ShopItem
 
 class PopularListAdapter(private val onClickListener: OnClickListener) : ListAdapter<ShopItem,
         PopularListAdapter.ShopItemViewHolder>(DiffCallback) {
@@ -56,21 +57,7 @@ class PopularListAdapter(private val onClickListener: OnClickListener) : ListAda
             useImageViewAndHideViewPager()
             description.text = shopItems.description
             userIdView.text = shopItems.userID.toString()
-            loadImageUsingGlide(shopItems)
-        }
-
-        private fun loadImageUsingGlide(shopItems: ShopItem) {
-            val imgUri = shopItems.picturesData[0].formats.P5.url
-                .toUri().buildUpon().scheme("https").build()
-
-            Glide.with(imageView.context)
-                .load(imgUri)
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_broken_image)
-                )
-                .into(imageView)
+            shopItems.picturesData[0].loadImageUsingGlide(imageView)
         }
 
         private fun useImageViewAndHideViewPager() {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PopularItemFragment">
+    tools:context=".fragments.PopularItemFragment">
 
     <com.example.depoptask.PopularItemCardView
         android:id="@+id/popularCard"

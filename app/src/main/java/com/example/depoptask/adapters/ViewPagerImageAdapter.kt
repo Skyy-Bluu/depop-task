@@ -1,15 +1,15 @@
-package com.example.depoptask
+package com.example.depoptask.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.example.depoptask.R
+import com.example.depoptask.loadImageUsingGlide
+import com.example.depoptask.network.PicturesData
 
 class ViewPagerImageAdapter : ListAdapter<PicturesData,
         ViewPagerImageAdapter.PicturesDataViewHolder>(DiffCallback) {
@@ -41,18 +41,8 @@ class ViewPagerImageAdapter : ListAdapter<PicturesData,
     class PicturesDataViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val imageView = view.findViewById<ImageView>(R.id.sliding_image)
 
-        fun bind(picture: PicturesData) {
-            val imgUri = picture.formats.P5.url
-                .toUri().buildUpon().scheme("https").build()
-
-            Glide.with(imageView.context)
-                .load(imgUri)
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_broken_image)
-                )
-                .into(imageView)
+        fun bind(picturesData: PicturesData) {
+            picturesData.loadImageUsingGlide(imageView)
         }
     }
 }
