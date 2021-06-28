@@ -14,9 +14,7 @@ import com.example.depoptask.adapters.PopularListAdapter
 import com.example.depoptask.viewmodels.PopularItemsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class PopularItemsFragment : Fragment() {
-
     private val viewModel: PopularItemsViewModel by viewModel()
     private val recyclerView: RecyclerView? get() = view?.findViewById(R.id.items_list)
     private val adapter = PopularListAdapter(PopularListAdapter.OnClickListener {

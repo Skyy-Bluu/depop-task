@@ -1,20 +1,14 @@
 package com.example.depoptask.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.depoptask.network.DepopApiService
 import com.example.depoptask.network.ShopItem
-import com.example.depoptask.network.getPopularItems
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.schedulers.Schedulers
 
-
-class PopularItemsViewModel : ViewModel() {
-    private var viewModelJob = Job()
-
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+class PopularItemsViewModel(private val depopApiService: DepopApiService) : ViewModel() {
 
     private val _shopItems = MutableLiveData<MutableList<ShopItem>>()
 
@@ -27,13 +21,34 @@ class PopularItemsViewModel : ViewModel() {
         get() = _navigateWithSelectedItem
 
     init {
-        coroutineScope.launch {
-            getPopularItems()
-                ?.let {
+        getPopularItemDataFromEndpoint()
+    }
+
+    private fun getPopularItemDataFromEndpoint() {
+        depopApiService.getPopularItems()
+            .subscribeOn(Schedulers.io())
+            .subscribe { value, error ->
+                value?.let {
                     _shopItems.postValue(it.objects.toMutableList())
                 }
-        }
+                error?.let {
+                    Log.e(TAG, "Failure: ${it.message}")
+                }
+            }
     }
+
+    //Coroutines implementation
+//    private fun getPopularItemDataFromEndpoint() {
+//        viewModelScope.launch {
+//            try {
+//                depopApiService.getPopularItems().let {
+//                    _shopItems.postValue(it.objects.toMutableList())
+//                }
+//            } catch (e:Exception){
+//                Log.e(TAG, "Failure: ${e.message}")
+//            }
+//        }
+//    }
 
     fun chooseItem(shopItem: ShopItem) {
         _navigateWithSelectedItem.value = shopItem
@@ -41,5 +56,9 @@ class PopularItemsViewModel : ViewModel() {
 
     fun itemChosen() {
         _navigateWithSelectedItem.value = null
+    }
+
+    companion object {
+        const val TAG = "PopularItemsViewModel"
     }
 }
