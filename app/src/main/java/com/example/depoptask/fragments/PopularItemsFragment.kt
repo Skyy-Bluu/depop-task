@@ -42,7 +42,7 @@ class PopularItemsFragment : Fragment() {
         })
         viewModel.navigateWithSelectedItem.observe(viewLifecycleOwner, {
             if (it != null) {
-                this.findNavController().navigate(
+                findNavController().navigate(
                     PopularItemsFragmentDirections.actionPopularItemsFragmentToItemDetails(
                         it
                     )

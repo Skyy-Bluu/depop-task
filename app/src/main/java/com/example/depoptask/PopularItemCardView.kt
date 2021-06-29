@@ -33,12 +33,12 @@ class PopularItemCardView(context: Context, attributes: AttributeSet) :
 
     fun initializeViewWithData(itemToDisplay: ShopItem){
         adapter.submitList(itemToDisplay.picturesData.toMutableList())
-        viewPager.adapter = adapter
         springDotsIndicator.setViewPager2(viewPager)
         descriptionTextView.text = itemToDisplay.description
         userIDTextView.text = itemToDisplay.userID.toString()
     }
     init {
         inflate(context, R.layout.popular_item_card_view, this)
+        viewPager.adapter = adapter
     }
 }
