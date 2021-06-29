@@ -47,7 +47,7 @@ class PopularItemsFragment : Fragment() {
                         it
                     )
                 )
-                viewModel.itemChosen()
+                viewModel.clearItemChosen()
             }
         })
     }

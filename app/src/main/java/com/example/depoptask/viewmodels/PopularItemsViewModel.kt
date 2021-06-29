@@ -54,7 +54,7 @@ class PopularItemsViewModel(private val depopApiService: DepopApiService) : View
         _navigateWithSelectedItem.value = shopItem
     }
 
-    fun itemChosen() {
+    fun clearItemChosen() {
         _navigateWithSelectedItem.value = null
     }
 
